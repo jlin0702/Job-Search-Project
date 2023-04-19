@@ -20,13 +20,10 @@
             }
             $query_user = "INSERT INTO USER
                 VALUES ('$email', '$password', '$phone', '$firstname', '$lastname', '$degree', '$university')";
-            $result_user = mysql_query($query) or die('Query failed: ' . mysql_error());
+            $result_user = mysqli_query($query) or die('Query failed: ' . mysqli_error());
 
-            // Free resultset
-            mysql_free_result($result_user);
-            mysql_free_result($result_workexp);
             // Close connection
-            mysql_close($conn);
+            mysqli_close($conn);
         ?>
         <div>
             <h3>You are registered successfully.</h3>
