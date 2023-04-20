@@ -20,22 +20,22 @@
             }
             #check if email already exists
             $query_email = "SELECT * FROM USER WHERE EMAIL = '$email'";
-            $result_email = mysqli_query($query_email) or die(mysql_error());
+            $result_email = mysqli_query($conn, $query_email) or die(mysql_error());
             $email_rows = mysqli_num_rows($result_email);
             if ($email_rows == 0)
             {
                 $query_user = "INSERT INTO USER
                     VALUES ('$email', '$phone', '$password')";
-                $result_user = mysqli_query($query_user) or die('Query failed: ' . mysqli_error());
+                $result_user = mysqli_query($conn, $query_user) or die('Query failed: ' . mysqli_error());
                 $query_jobseeker = "INSERT INTO JOBSEEKER
                     VALUES ('$email', '$firstname', '$lastname', '$degree', '$university')";
-                $result_jobseeker = mysqli_query($query_jobseeker) or die('Query failed: ' . mysqli_error());
+                $result_jobseeker = mysqli_query($conn, $query_jobseeker) or die('Query failed: ' . mysqli_error());
             
                 for ($i = 0; $i < count($workexp); $i++)
                 {
                     $query_workexp = "INSERT INTO JOBSEEKERWORKEXPERIENCE
                         VALUES ('$email', '$workexp[$i]')";
-                    $result_user = mysqli_query($query_workexp) or die('Query failed: ' . mysqli_error());
+                    $result_user = mysqli_query($conn, $query_workexp) or die('Query failed: ' . mysqli_error());
                 }
         ?>
         <div>
