@@ -18,16 +18,40 @@
             {
                 array_push($workexp, $_POST['workexp'.$i]);
             }
-            $query_user = "INSERT INTO USER
-                VALUES ('$email', '$password', '$phone', '$firstname', '$lastname', '$degree', '$university')";
-            $result_user = mysqli_query($query) or die('Query failed: ' . mysqli_error());
-
-            // Close connection
-            mysqli_close($conn);
+            #check if email already exists
+            $query_email = "SELECT * FROM JOBSEEKER WHERE EMAIL = '$email'";
+            $result_email = mysqli_query($query_email) or die(mysql_error());
+            $email_rows = mysqli_num_rows($result_email);
+            if ($email_rows == 0)
+            {
+                $query_user = "INSERT INTO USER
+                    VALUES ('$email', '$password', '$phone', '$firstname', '$lastname', '$degree', '$university')";
+                $result_user = mysqli_query($query_user) or die('Query failed: ' . mysqli_error());
+            
+                for ($i = 0; $i < count($workexp); $i++)
+                {
+                    $query_workexp = "INSERT INTO JOBSEEKERWORKEXPERIENCE
+                        VALUES ('$email', '$workexp[$i]')";
+                    $result_user = mysqli_query($query_workexp) or die('Query failed: ' . mysqli_error());
+                }
         ?>
         <div>
             <h3>You are registered successfully.</h3>
-            <p>Click here to <a href='login.php'>Login</a></p>
+            <p>Click here to <a href='index.html'>Login</a></p>
         </div>
+        <?php
+            }
+            else
+            {
+        ?>
+        <div>
+            <h3>Email already exists</h3>
+            <p>Click here to <a href='register-job-seeker.html'>go back</a></p>
+        </div>
+        <?php
+            }
+            // Close connection
+            mysqli_close($conn);
+        ?>
     </body>
 </html>
