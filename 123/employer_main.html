@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Main</title>
+    <link rel="stylesheet" href="employer_main.css">
+</head>
+<body>
+    <h1>Welcome, Employer</h1>
+    <div id="personal-info">
+        <p>Email: <span id="email">none</span></p>
+        <p>Company Name: <span id="company-name">none</span></p>
+        <p>Phone Number: <span id="phone-number">none</span></p>
+        <p>Location: <span id="location">none</span></p>
+        <button id="modify-data-btn">Modify Data</button>
+    </div>
+
+    <div id="modify-data-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Modify Personal Data</h2>
+            <form id="modify-data-form">
+                <label for="email-modal">Email:</label>
+                <input type="email" id="email-modal" required><br>
+                <label for="company-name-modal">Company Name:</label>
+                <input type="text" id="company-name-modal" required><br>
+                <label for="phone-number-modal">Phone Number:</label>
+                <input type="tel" id="phone-number-modal" required><br>
+                <label for="location-modal">Location:</label>
+                <input type="text" id="location-modal" required><br>
+            </form>
+            <button onclick="saveData()">Save</button>
+        </div>
+    </div>
+
+    <div id="post-job">
+        <h2>Post Job Information</h2>
+        <form>
+            <label for="job-title">Job Title:</label>
+            <input type="text" id="job-title" required><br>
+            <label for="job-description">Job Description:</label>
+            <textarea id="job-description" required></textarea><br>
+            <label for="salary">Salary:</label>
+            <input type="number" id="salary" required><br>
+            <button type="submit">Publish</button>
+        </form>
+    </div>
+
+    <script>
+        const modal = document.getElementById("modify-data-modal");
+        const btn = document.getElementById("modify-data-btn");
+        const span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function saveData() {
+            // Implement the logic to save the data and update the displayed information
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>

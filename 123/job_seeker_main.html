@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Seeker Main</title>
+    <link rel="stylesheet" href="job_seeker_main.css">
+</head>
+<body>
+    <h1>Welcome, Job Seeker</h1>
+    <div id="personal-info">
+        <p>Email: <span id="email">none</span></p>
+        <p>First Name: <span id="first-name">none</span></p>
+        <p>Last Name: <span id="last-name">none</span></p>
+        <p>Most Recent University: <span id="university">none</span></p>
+        <p>Most Recent Degree: <span id="degree">none</span></p>
+        <button id="modify-data-btn">Modify Data</button>
+    </div>
+
+    <div id="modify-data-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Modify Personal Data</h2>
+            <form id="modify-data-form">
+                <label for="email-modal">Email:</label>
+                <input type="email" id="email-modal" required><br>
+                <label for="first-name-modal">First Name:</label>
+                <input type="text" id="first-name-modal" required><br>
+                <label for="last-name-modal">Last Name:</label>
+                <input type="text" id="last-name-modal" required><br>
+                <label for="university-modal">Most Recent University:</label>
+                <input type="text" id="university-modal" required><br>
+                <label for="degree-modal">Most Recent Degree:</label>
+                <input type="text" id="degree-modal" required><br>
+            </form>
+            <button onclick="saveData()">Save</button>
+        </div>
+    </div>
+
+    <div id="search-section">
+        <h2>Search Jobs</h2>
+        <div id="search-by-keyword">
+            <label for="keyword-input">Search by Keyword:</label>
+            <input type="text" id="keyword-input">
+            <button id="keyword-search-btn">Search</button>
+        </div>
+        <div id="search-by-salary">
+            <label for="salary-floor-input">Search by Salary:</label>
+            <input type="number" id="salary-floor-input" placeholder="Min" min="0">
+            <input type="number" id="salary-ceiling-input" placeholder="Max" min="0">
+            <button id="salary-search-btn">Search</button>
+        </div>
+    </div>
+
+    <script src="job_seeker_main.js"></script>
+</body>
+</html>
