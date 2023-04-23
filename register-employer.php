@@ -2,9 +2,9 @@
 <html>
     <head>
         <title>Register Employer</title>
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="styles.css"/>
     </head>
-    <body>
+    <body class='login-register-body'>
         <?php
             require('db.php');
             $email = $_POST['email'];

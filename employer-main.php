@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <head>
     <title>Employer Main Page</title>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="styles.css"/>
 </head>
-<body>
+<body class='main-body'>
     <h1>Welcome, <?php echo $_SESSION['email']; ?> </h1>
     <h2>Post a Job</h2>
     <form action="server-side-code" method="POST">

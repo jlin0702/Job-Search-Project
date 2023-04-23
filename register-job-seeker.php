@@ -2,9 +2,9 @@
 <html>
     <head>
         <title>Register Job Seeker</title>
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="styles.css"/>
     </head>
-    <body>
+    <body class='login-register-body'>
         <?php
             $email = $_POST['email'];
             $password = $_POST['password'];

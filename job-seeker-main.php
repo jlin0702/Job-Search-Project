@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <head>
     <title>Job Seeker Main Page</title>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="styles.css"/>
 </head>
-<body>
+<body class='main-body'>
+    <button id="logout-button" onclick="location.href='logout.php'">Logout</button>
     <h1>Welcome, [Job Seeker Name]</h1>
     <h2>Search for Jobs</h2>
     <form action="server-side-code" method="GET">
