@@ -88,3 +88,21 @@ h1 {
 .search-btn:hover {
   background-color: #45a049;
 }
+
+/* ... (previous styles) ... */
+
+#logout-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+#logout-btn:hover {
+  background-color: #45a049;
+}
