@@ -1,10 +1,13 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <head>
     <title>Employer Main Page</title>
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <h1>Welcome, [Company Name]</h1>
+    <h1>Welcome, <?php echo $_SESSION['email']; ?> </h1>
     <h2>Post a Job</h2>
     <form action="server-side-code" method="POST">
         <label for="job_title">Job Title:</label>
@@ -21,11 +24,25 @@
         <br>
         <input type="submit" value="Post Job">
     </form>
-    <h2>Job Applications</h2>
-    <!-- Display job applications here -->
+    <?php
+        require_once('db.php');
+        // $query_postings = "SELECT * ";
+    ?>
+    <h2>Current Job Postings</h2>
+    <h3>[Job Title]</h3>
+    <p>[Job Description]</p>
+    <p>Location: [Location] | Salary: [Salary]</p>
+    <button>View </button>
+
     <h3>[Job Seeker Name] applied for [Job Title]</h3>
     <p>Application Date: [Application Date] | Application Status: [Application Status]</p>
     <button>View Profile</button>
-    <!-- Add more job applications as necessary -->
+    <!-- <h2>Job Applications</h2>
+    <h3>[Job Seeker Name] applied for [Job Title]</h3>
+    <p>Application Date: [Application Date] | Application Status: [Application Status]</p>
+    <button>View Profile</button> -->
+    <?php
+        mysqli_close($conn);
+    ?>
 </body>
 </html>

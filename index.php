@@ -15,11 +15,11 @@
             $result_jobseeker = mysqli_query($conn, $query_jobseeker) or die('Query failed: ' . mysqli_error($conn));
             if (mysqli_num_rows($result_jobseeker) == 1)
             {
-                header("Location: job-seeker-main.html");
+                header("Location: job-seeker-main.php");
             }
             else
             {
-                header("Location: employer-main.html");
+                header("Location: employer-main.php");
             }
             exit;
         }
@@ -34,6 +34,6 @@
         <br>
         <input type="submit" value="Login">
     </form>
-    <p>Don't have an account? <a href="register-job-seeker.html">Register as Job Seeker</a> or <a href="register-employer.html">Register as Employer</a></p>
+    <p>Don't have an account? <a href="register-job-seeker.php">Register as Job Seeker</a> or <a href="register-employer.php">Register as Employer</a></p>
 </body>
 </html>

@@ -40,7 +40,7 @@
         ?>
         <div>
             <h3>You are registered successfully.</h3>
-            <p>Click here to <a href='index.html'>Login</a></p>
+            <p>Click here to <a href='index.php'>Login</a></p>
         </div>
         <?php
             }

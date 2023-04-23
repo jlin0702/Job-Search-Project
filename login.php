@@ -21,16 +21,16 @@
                 $result_jobseeker = mysqli_query($conn, $query_jobseeker) or die('Query failed: ' . mysqli_error($conn));
                 if (mysqli_num_rows($result_jobseeker) == 1)
                 {
-                    header("Location: job-seeker-main.html");
+                    header("Location: job-seeker-main.php");
                 }
                 else
                 {
-                    header("Location: employer-main.html");
+                    header("Location: employer-main.php");
                 }
             } else {
                 echo "<div>
                         <h3>Incorrect email/password.</h3>
-                        <p>Click here to <a href='index.html'>Login</a> again.</p>
+                        <p>Click here to <a href='index.php'>Login</a> again.</p>
                         </div>";
             }
             mysqli_close($conn);
