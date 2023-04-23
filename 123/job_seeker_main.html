@@ -4,118 +4,235 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Seeker Main</title>
-    <link rel="stylesheet" href="job_seeker_main.css">
-    <script>
-        function showPopup() {
-            document.getElementById("popup").style.display = "block";
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
         }
 
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 1rem;
+            box-sizing: border-box;
         }
-    </script>
+
+        .welcome {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logout {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .personal-info, .job-listings {
+            margin: 1rem 0;
+			font-size: 1.5em;
+        }
+
+        .job-listings {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .job-listing {
+            border: 1px solid black;
+            padding: 1rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 1rem;
+            width: 30%;
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 50%;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 <body>
-    <button id="logout-button" onclick="location.href='login.html'">Logout</button>
-    <h1>Job Seeker Main</h1>
-    <div>
-        Email: None
-        <br>
-        First Name: None
-        <br>
-        Last Name: None
-        <br>
-        Most Recent University: None
-        <br>
-        Most Recent Degree: None
-        <br>
-        <button onclick="showPopup()">Modify Data</button>
+    <header class="header">
+        <h1 class="welcome">Welcome, Job Seeker!</h1>
+        <button class="logout" onclick="location.href='login.html'">Logout</button>
+    </header>
+
+    <section class="personal-info">
+        <h2>Profile</h2>
+        Email: <span id="email">None</span><br>
+        First Name: <span id="firstName">None</span><br>
+        Last Name: <span id="lastName">None</span><br>
+        Most Recent University: <span id="university">None</span><br>
+        Most Recent Degree: <span id="degree">None</span><br>
+        <button class="modify-data-btn" onclick="openModal()">Modify Data</button>
+    </section>
+
+    <div class="modal" id="modifyDataModal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <form id="modifyDataForm">
+				Email: <input type="email" id="emailInput" class="short-input" required><br>
+				First Name: <input type="text" id="firstNameInput" class="short-input" required><br>
+				Last Name: <input type="text" id="lastNameInput" class="short-input" required><br>
+				Most Recent University: <input type="text" id="universityInput" class="short-input" required><br>
+				Most Recent Degree: <input type="text" id="degreeInput" class="short-input" required><br>
+                <button type="submit">Submit</button>
+                <button type="button" class="cancel" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
     </div>
 
-    <div id="popup" style="display:none;">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br>
-        <label for="first-name">First Name:</label>
-        <input type="text" id="first-name" name="first-name" required>
-        <br>
-        <label for="last-name">Last Name:</label>
-        <input type="text" id="last-name" name="last-name" required>
-        <br>
-        <label for="university">Most Recent University:</label>
-        <input type="text" id="university" name="university" required>
-        <br>
-        <label for="degree">Most Recent Degree:</label>
-        <input type="text" id="degree" name="degree" required>
-        <br>
-        <button onclick="closePopup()">Save</button>
-        <button onclick="closePopup()">Cancel</button>
-    </div>
-
-    <div class="job-listings">
+    <section class="job-listings">
         <h2>Job Listings</h2>
-        <!-- Repeat the job listing content 10 times -->
         <div class="job-listing">
-            <h3>[Job Title] at [Company Name]</h3>
-            <p>[Job Description]</p>
-            <p>Location: [Location]</p>
-            <p>Salary: [Salary]</p>
+            Job Title: Software Engineer<br>
+            Company Name: TechCorp<br>
+            Location: San Francisco, CA<br>
+			Salary：1$<br>
+            <button>Apply</button>
         </div>
-        <div class="job-listing">
-            <h3>[Job Title] at [Company Name]</h3>
-            <p>[Job Description]</p>
-            <p>Location: [Location]</p>
-            <p>Salary: [Salary]</p>
+		<div class="job-listing">
+            Job Title: Software Engineer<br>
+            Company Name: TechCorp<br>
+            Location: San Francisco, CA<br>
+			Salary：1$<br>
+            <button>Apply</button>
         </div>
-        <div class="job-listing">
-            <h3>[Job Title] at [Company Name]</h3>
-            <p>[Job Description]</p>
-            <p>Location: [Location]</p>
-            <p>Salary: [Salary]</p>
+		<div class="job-listing">
+            Job Title: Software Engineer<br>
+            Company Name: TechCorp<br>
+            Location: San Francisco, CA<br>
+			Salary：1$<br>
+            <button>Apply</button>
         </div>
-        <div class="job-listing">
-            <h3>[Job Title] at [Company Name]</h3>
-            <p>[Job Description]</p>
-            <p>Location: [Location]</p>
-            <p>Salary: [Salary]</p>
+		<div class="job-listing">
+            Job Title: Software Engineer<br>
+            Company Name: TechCorp<br>
+            Location: San Francisco, CA<br>
+			Salary：1$<br>
+            <button>Apply</button>
         </div>
-        <div class="job-listing">
-            <h3>[Job Title] at [Company Name]</h3>
-            <p>[Job Description]</p>
-            <p>Location: [Location]</p>
-            <p>Salary: [Salary]</p>
+		<div class="job-listing">
+            Job Title: Software Engineer<br>
+            Company Name: TechCorp<br>
+            Location: San Francisco, CA<br>
+			Salary：1$<br>
+            <button>Apply</button>
         </div>
-        <div class="job-listing">
-            <h3>[Job Title] at [Company Name]</h3>
-            <p>[Job Description]</p>
-            <p>Location: [Location]</p>
-            <p>Salary: [Salary]</p>
+		<div class="job-listing">
+            Job Title: Software Engineer<br>
+            Company Name: TechCorp<br>
+            Location: San Francisco, CA<br>
+			Salary：1$<br>
+            <button>Apply</button>
         </div>
-        <div class="job-listing">
-            <h3>[Job Title] at [Company Name]</h3>
-            <p>[Job Description]</p>
-            <p>Location: [Location]</p>
-            <p>Salary: [Salary]</p>
+		<div class="job-listing">
+            Job Title: Software Engineer<br>
+            Company Name: TechCorp<br>
+            Location: San Francisco, CA<br>
+			Salary：1$<br>
+            <button>Apply</button>
         </div>
-        <div class="job-listing">
-            <h3>[Job Title] at [Company Name]</h3>
-            <p>[Job Description]</p>
-            <p>Location: [Location]</p>
-            <p>Salary: [Salary]</p>
+		<div class="job-listing">
+            Job Title: Software Engineer<br>
+            Company Name: TechCorp<br>
+            Location: San Francisco, CA<br>
+			Salary：1$<br>
+            <button>Apply</button>
         </div>
-        <div class="job-listing">
-            <h3>[Job Title] at [Company Name]</h3>
-            <p>[Job Description]</p>
-            <p>Location: [Location]</p>
-            <p>Salary: [Salary]</p>
+		<div class="job-listing">
+            Job Title: Software Engineer<br>
+            Company Name: TechCorp<br>
+            Location: San Francisco, CA<br>
+			Salary：1$<br>
+            <button>Apply</button>
         </div>
-        <div class="job-listing">
-            <h3>[Job Title] at [Company Name]</h3>
-            <p>[Job Description]</p>
-            <p>Location: [Location]</p>
-            <p>Salary: [Salary]</p>
+		<div class="job-listing">
+            Job Title: Software Engineer<br>
+            Company Name: TechCorp<br>
+            Location: San Francisco, CA<br>
+			Salary：1$<br>
+            <button>Apply</button>
         </div>
-    </div>
+		<div class="job-listing">
+            Job Title: Software Engineer<br>
+            Company Name: TechCorp<br>
+            Location: San Francisco, CA<br>
+			Salary：1$<br>
+            <button>Apply</button>
+        </div>
+        <!-- Add more job listings here -->
+    </section>
+
+    <script>
+        document.getElementById("modifyDataForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("emailInput").value;
+            const firstName = document.getElementById("firstNameInput").value;
+            const lastName = document.getElementById("lastNameInput").value;
+            const university = document.getElementById("universityInput").value;
+            const degree = document.getElementById("degreeInput").value;
+
+            document.getElementById("email").textContent = email;
+            document.getElementById("firstName").textContent = firstName;
+            document.getElementById("lastName").textContent = lastName;
+            document.getElementById("university").textContent = university;
+            document.getElementById("degree").textContent = degree;
+
+            closeModal();
+        });
+
+        function openModal() {
+            document.getElementById("modifyDataModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("modifyDataModal").style.display = "none";
+        }
+
+        document.getElementsByClassName("modal-close")[0].addEventListener("click", function() {
+            closeModal();
+        });
+    </script>
 </body>
 </html>
 
