@@ -6,7 +6,7 @@
     </head>
     <body class='login-register-body'>
         <?php
-            require('db.php');
+            require_once('db.php');
             $email = $_POST['email'];
             $password = $_POST['password'];
             $phone = $_POST['phone'];

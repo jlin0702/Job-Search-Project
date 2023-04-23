@@ -8,7 +8,7 @@
 </head>
 <body class='login-register-body'>
     <?php
-        require('db.php');
+        require_once('db.php');
         if (isset($_SESSION['email'])) {
             $email = $_SESSION['email'];
             $query_jobseeker = "SELECT EMAIL FROM JOBSEEKER WHERE EMAIL = '$email'";
@@ -38,8 +38,8 @@
         </form>
 
         <div id="register-links">
-            <a href="register-job-seeker.html">Register as Job Seeker</a>
-            <a href="register-employer.html">Register as Employer</a>
+            <a class="login-register-link" href="register-job-seeker.html">Register as Job Seeker</a>
+            <a class="login-register-link" href="register-employer.html">Register as Employer</a>
         </div>
     </div>
 </body>
