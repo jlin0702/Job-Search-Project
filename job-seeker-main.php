@@ -35,7 +35,7 @@
             <span class="modal-close">&times;</span>
             <form id="modifyDataForm" action="modify-job-seeker.php" method="POST">
 				Email: <input type="email" id="mod-email" name="mod-email" class="short-input" value="<?php echo $email ?>" readonly>
-                Phone: <input type="tel" id="mod-phone" name="mod-phone" class="short-input" placeholder="123-456-7890" value="<?php echo $user["PHONENUMBER"]?>" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                Phone Number: <input type="tel" id="mod-phone" name="mod-phone" class="short-input" placeholder="123-456-7890" value="<?php echo $user["PHONENUMBER"]?>" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
 				First Name: <input type="text" id="mod-firstname" name="mod-firstname" class="short-input" value="<?php echo $jobseeker["FIRSTNAME"]?>" required>
 				Last Name: <input type="text" id="mod-lastname" name="mod-lastname" class="short-input" value="<?php echo $jobseeker["LASTNAME"]?>" required>
 				University: <input type="text" id="mod-university" name="mod-university" class="short-input" value="<?php echo $jobseeker["UNIVERSITY"]?>" required>
@@ -51,7 +51,7 @@
                 ?>
                 Work Experiences (delimit with ;): <input type="text" id="workexp" name="workexp" class="short-input" value="<?php echo implode(';', $workexp_arr)?>">
                 <input type="submit">
-                <button type="button" class="cancel" onclick="closeModal()">Cancel</button>
+                <!-- <button type="button" class="cancel" onclick="closeModal()">Cancel</button> -->
             </form>
         </div>
     </div>
@@ -59,18 +59,18 @@
     <section class="job-listings">
         <h2>Job Listings</h2>
         <?php
-            $query_jobs = "SELECT * FROM JOB JOIN EMPLOYER";
+            $query_jobs = "SELECT * FROM JOB LEFT JOIN EMPLOYER ON EMAIL=EMPLOYEREMAIL";
             $result_jobs = mysqli_query($conn, $query_jobs) or die('Query failed: ' . mysqli_error($conn));
-            while ($job = mysqli_fetch_assoc($result_workexp))
+            while ($job = mysqli_fetch_assoc($result_jobs))
             {
-                // echo "<div class='job-listing'>
-                //     Job Title: ".$job['JOBTITLE']."<br>
-                //     Company Name: ".$job['COMPANYNAME']."<br>
-                //     Location: ".$job['LOCATION']."<br>
-                //     Salary：$".$job['SALARY']."<br>
-                //     Description: ".$job['DESCRIPTION']."<br>
-                //     <button>Apply</button>
-                //     </div>"
+                echo "<div class='job-listing'>
+                    Job Title: ".$job['JOBTITLE']."<br>
+                    Company Name: ".$job['COMPANYNAME']."<br>
+                    Location: ".$job['LOCATION']."<br>
+                    Salary: $".$job['SALARY']."<br>
+                    Description: ".$job['DESCRIPTION']."<br>
+                    <button>Apply</button>
+                    </div>";
             }
         ?>
     </section>
