@@ -14,11 +14,6 @@
             $lastname = $_POST['lastname'];
             $university = $_POST['university'];
             $major = $_POST['major'];
-            // $workexp = array();
-            // for ($i = 1; $i <= 5; $i++)
-            // {
-            //     array_push($workexp, $_POST['workexp'.$i]);
-            // }
             #check if email already exists
             $query_email = "SELECT * FROM USER WHERE EMAIL = '$email'";
             $result_email = mysqli_query($conn, $query_email) or die(mysqli_error($conn));
@@ -31,13 +26,7 @@
                 $query_jobseeker = "INSERT INTO JOBSEEKER
                     VALUES ('$email', '$firstname', '$lastname', '$major', '$university')";
                 $result_jobseeker = mysqli_query($conn, $query_jobseeker) or die('Query failed: ' . mysqli_error($conn));
-            
-                // for ($i = 0; $i < count($workexp); $i++)
-                // {
-                //     $query_workexp = "INSERT INTO JOBSEEKERWORKEXPERIENCE
-                //         VALUES ('$email', '$workexp[$i]')";
-                //     $result_user = mysqli_query($conn, $query_workexp) or die('Query failed: ' . mysqli_error($conn));
-                // }
+
                 echo "<div>
                     <h3>You are registered successfully.</h3>
                     <p>Click here to <a href='index.php'>Login</a></p>
