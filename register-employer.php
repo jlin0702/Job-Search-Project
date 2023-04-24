@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,12 +26,9 @@
                 $query_employer = "INSERT INTO EMPLOYER
                     VALUES ('$email', '$companyname')";
                 $result_employer = mysqli_query($conn, $query_employer) or die('Query failed: ' . mysqli_error($conn));
-        ?>
-        <div>
-            <h3>You are registered successfully.</h3>
-            <p>Click here to <a href='index.php'>Login</a></p>
-        </div>
-        <?php
+                $_SESSION['email'] = $email;
+                header('Location: employer-main.php');
+                exit;
             }
             else
             {
@@ -39,8 +39,6 @@
         </div>
         <?php
             }
-            // Close connection
-            mysqli_close($conn);
         ?>
     </body>
 </html>

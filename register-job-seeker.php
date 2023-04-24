@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,11 +29,9 @@
                 $query_jobseeker = "INSERT INTO JOBSEEKER
                     VALUES ('$email', '$firstname', '$lastname', '$major', '$university')";
                 $result_jobseeker = mysqli_query($conn, $query_jobseeker) or die('Query failed: ' . mysqli_error($conn));
-
-                echo "<div>
-                    <h3>You are registered successfully.</h3>
-                    <p>Click here to <a href='index.php'>Login</a></p>
-                    </div>";
+                $_SESSION['email'] = $email;
+                header('Location: job-seeker-main.php');
+                exit;
             }
             else
             {
@@ -39,8 +40,6 @@
                     <p>Click here to <a href='register-job-seeker.html'>go back</a></p>
                     </div>";
             }
-            // Close connection
-            mysqli_close($conn);
         ?>
     </body>
 </html>

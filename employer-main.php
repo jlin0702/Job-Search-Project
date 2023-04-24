@@ -48,10 +48,10 @@
             <span class="modal-close">&times;</span>
             <form action="add-job.php" method="POST">
                 <h2>Post Job Information</h2>
-                Job Title: <input type="text" name="jobtitle"><br>
+                Job Title: <input type="text" name="jobtitle" required><br>
                 Job Description: <textarea name="description"></textarea><br>
-                Salary: <input type="number" step="0.01" name="salary"><br>
-                Location: <input type="text" name="location"><br>
+                Salary: <input type="number" step="0.01" name="salary" required><br>
+                Location: <input type="text" name="location" required><br>
                 <button type="submit">Publish</button>
         </form>
         </div>
