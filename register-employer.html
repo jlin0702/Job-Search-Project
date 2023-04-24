@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <head>
     <title>Register Employer</title>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="styles.css"/>
 </head>
-<body>
+<body class='login-register-body'>
     <h1>Register Employer</h1>
     <form action="register-employer.php" method="POST">
         <label for="email">Email:</label>
@@ -13,14 +13,16 @@
         <input type="password" id="password" name="password" required>
         <br>
         <label for="phone">Phone Number:</label>
-        <input type="text" id="phone" name="phone" required>
+        <input type="text" id="phone" name="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
         <br>
         <label for="companyname">Company Name:</label>
         <input type="text" id="companyname" name="companyname" required>
         <br>
         <input type="submit" value="Register">
     </form>
-    <p><a href="index.html">Click here to Login</a></p>
-    <p><a href="register-job-seeker.html">Click here to Register as Job Seeker</a></p>
+    <div id="register-links">
+        <a class="login-register-link" href="index.php">Go back to Login</a>
+        <a class="login-register-link" href="register-employer.html">Register as Employer</a>
+    </div>
 </body>
 </html>

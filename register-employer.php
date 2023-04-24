@@ -2,11 +2,11 @@
 <html>
     <head>
         <title>Register Employer</title>
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="styles.css"/>
     </head>
-    <body>
+    <body class='login-register-body'>
         <?php
-            require('db.php');
+            require_once('db.php');
             $email = $_POST['email'];
             $password = $_POST['password'];
             $phone = $_POST['phone'];
@@ -26,7 +26,7 @@
         ?>
         <div>
             <h3>You are registered successfully.</h3>
-            <p>Click here to <a href='index.html'>Login</a></p>
+            <p>Click here to <a href='index.php'>Login</a></p>
         </div>
         <?php
             }

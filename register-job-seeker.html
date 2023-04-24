@@ -2,27 +2,37 @@
 <html>
     <head>
         <title>Register Job Seeker</title>
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="styles.css"/>
     </head>
-    <body>
+    <body class='login-register-body'>
+        <h1>Register as Job Seeker</h1>
         <form action="register-job-seeker.php" method="post">
-                <h1>Register Job Seeker</h1>
-                <input type="email" name="email" placeholder="Email Address" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <input type="text" name="phone" placeholder="Phone Number" required>
-                <input type="text" name="firstname" placeholder="First Name" required>
-                <input type="text" name="lastname" placeholder="Last Name" required>
-                <input type="text" name="mostrecentdegree" placeholder="Most Recent Degree" required>
-                <input type="text" name="mostrecentuniversity" placeholder="Most Recent University" required>
-                <label>Work Experience: </label>
-                <input type="text" name="workexp1">
-                <input type="text" name="workexp2">
-                <input type="text" name="workexp3">
-                <input type="text" name="workexp4">
-                <input type="text" name="workexp5">
-                <input type="submit" name="submit" value="Register">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+            <br>
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required>
+            <br>
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" required>
+            <br>
+            <label for="university">University:</label>
+            <input type="text" id="university" name="university" required>
+            <br>
+            <label for="major">Major:</label>
+            <input type="text" id="major" name="major" required>
+            <br>
+            <input type="submit" value="Register">
         </form>
-        <p><a href="index.html">Click here to Login</a></p>
-        <p><a href="register-employer.html">Click here to Register as Employer</a></p>
+        <div id="register-links">
+            <a class="login-register-link" href="index.php">Go back to Login</a>
+            <a class="login-register-link" href="register-employer.html">Register as Employer</a>
+        </div>
     </body>
 </html>
