@@ -30,7 +30,7 @@
         <button class="logout" onclick="location.href='logout.php'">Logout</button>
     </header>
 
-    <div class="modalButtons">
+    <div class="modalbuttons">
         <button class="modify-data-btn" onclick="openModal()">View Profile</button>
     </div>
 

@@ -31,7 +31,7 @@
         <button class="logout" onclick="location.href='logout.php'">Logout</button>
     </header>
 
-    <div class="modalButtons">
+    <div class="modalbuttons">
         <button class="modify-data-btn" onclick="openProfile()">View Profile</button>
         <button class="modify-data-btn" onclick="openPostJob()">Post a Job</button>
     </div>
