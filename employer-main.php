@@ -82,7 +82,6 @@
     </div>
 
     <h2 class="center">Application Information</h2>
-    <div class="row">
         <?php
         $query_application = "SELECT * FROM APPLY
             LEFT JOIN JOBSEEKER ON JOBSEEKEREMAIL=JOBSEEKER.EMAIL
@@ -92,6 +91,7 @@
         $result_application = mysqli_query($conn, $query_application) or die('Query failed: ' . mysqli_error($conn));
         while ($application = mysqli_fetch_assoc($result_application))
         {
+            echo "<div class='row'>";
             echo "<div class='item'>
                 <p><b>Job title:</b> ".$application['JOBTITLE']."</p>
                 <p>Last Name: ".$application['LASTNAME']."</p>
@@ -117,9 +117,9 @@
                 }
             }
             echo "</div>";
+            echo "</div>";
         }
         ?>
-    </div>
     <script>
         function openProfile() {
             document.getElementsByClassName("modal")[0].style.display = "block";
