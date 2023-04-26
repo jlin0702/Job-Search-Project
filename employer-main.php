@@ -20,6 +20,10 @@
         $user = mysqli_fetch_assoc($result_user);
         $query_employer = "SELECT * FROM EMPLOYER WHERE EMAIL = '$email'";
         $result_employer = mysqli_query($conn, $query_employer) or die('Query failed: ' . mysqli_error($conn));
+        if (mysqli_num_rows($result_employer) == 0)
+        {
+            header("Location: index.php");
+        }
         $employer = mysqli_fetch_assoc($result_employer);
     ?>
     <header class="header">
@@ -27,8 +31,11 @@
         <button class="logout" onclick="location.href='logout.php'">Logout</button>
     </header>
 
-    <button class="modify-data-btn" onclick="openProfile()">View Profile</button>
-
+    <div class="modalButtons">
+        <button class="modify-data-btn" onclick="openProfile()">View Profile</button>
+        <button class="modify-data-btn" onclick="openPostJob()">Post a Job</button>
+    </div>
+    
     <div class="modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
@@ -42,7 +49,7 @@
         </div>
     </div>
 
-    <button class="modify-data-btn" onclick="openPostJob()">Post a Job</button>
+    
     <div class="modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
@@ -76,30 +83,42 @@
 
     <h2 class="center">Application Information</h2>
     <div class="row">
-        <div class="item">
-            <p>Job title: none</p>
-            <p>Email: none</p>
-            <p>Surname: none</p>
-            <p>First Name: none</p>
-            <p>Most Recent University: none</p>
-            <p>Most Recent Degree: none</p>
-        </div>
-        <div class="item">
-            <p>Job title: none</p>
-            <p>Email: none</p>
-            <p>Surname: none</p>
-            <p>First Name: none</p>
-            <p>Most Recent University: none</p>
-            <p>Most Recent Degree: none</p>
-        </div>
-        <div class="item">
-            <p>Job title: none</p>
-            <p>Email: none</p>
-            <p>Surname: none</p>
-            <p>First Name: none</p>
-            <p>Most Recent University: none</p>
-            <p>Most Recent Degree: none</p>
-        </div>
+        <?php
+        $query_application = "SELECT * FROM APPLY
+            LEFT JOIN JOBSEEKER ON JOBSEEKEREMAIL=JOBSEEKER.EMAIL
+            LEFT JOIN JOB ON JOBID=ID
+            LEFT JOIN USER ON JOBSEEKEREMAIL=USER.EMAIL
+            WHERE EMPLOYEREMAIL='$email'";
+        $result_application = mysqli_query($conn, $query_application) or die('Query failed: ' . mysqli_error($conn));
+        while ($application = mysqli_fetch_assoc($result_application))
+        {
+            echo "<div class='item'>
+                <p><b>Job title:</b> ".$application['JOBTITLE']."</p>
+                <p>Last Name: ".$application['LASTNAME']."</p>
+                <p>First Name: ".$application['FIRSTNAME']."</p>
+                <p>Phone: ".$application['PHONENUMBER']."</p>
+                <p>Email: ".$application['JOBSEEKEREMAIL']."</p>
+                <p>University: ".$application['UNIVERSITY']."</p>
+                <p>Major: ".$application['MAJOR']."</p>
+                </div>";
+            $query_workexp = "SELECT WORKEXPERIENCE FROM JOBSEEKERWORKEXPERIENCE WHERE EMAIL='".$application['JOBSEEKEREMAIL']."'";
+            $result_workexp = mysqli_query($conn, $query_workexp) or die('Query failed: ' . mysqli_error($conn));
+            echo "<div class='item'>
+                <h3>Work Experience</h3>";
+            if (mysqli_num_rows($result_workexp) == 0)
+            {
+                echo "(empty)";
+            }
+            else
+            {
+                while ($workexp = mysqli_fetch_assoc($result_workexp))
+                {
+                    echo "<p>".$workexp['WORKEXPERIENCE']."</p>";
+                }
+            }
+            echo "</div>";
+        }
+        ?>
     </div>
     <script>
         function openProfile() {

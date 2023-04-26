@@ -7,7 +7,7 @@
     $location = $_POST['location'];
     $email = $_SESSION['email'];
     $query_job = "INSERT INTO JOB (JOBTITLE, EMPLOYEREMAIL, DESCRIPTION, LOCATION, SALARY)
-        VALUES ('$jobtitle', '$email', '$description', '$location', '$salary')";
+        VALUES ('$jobtitle', '$email', '$description', '$location', $salary)";
     $result_job = mysqli_query($conn, $query_job) or die('Query failed: ' . mysqli_error($conn));
     header("Location: employer-main.php");
     exit;

@@ -19,6 +19,10 @@
         $user = mysqli_fetch_assoc($result_user);
         $query_jobseeker = "SELECT * FROM JOBSEEKER WHERE EMAIL = '$email'";
         $result_jobseeker = mysqli_query($conn, $query_jobseeker) or die('Query failed: ' . mysqli_error($conn));
+        if (mysqli_num_rows($result_jobseeker) == 0)
+        {
+            header("Location: index.php");
+        }
         $jobseeker = mysqli_fetch_assoc($result_jobseeker);
     ?>
     <header class="header">
@@ -26,9 +30,9 @@
         <button class="logout" onclick="location.href='logout.php'">Logout</button>
     </header>
 
-    <section class="personal-info">
+    <div class="modalButtons">
         <button class="modify-data-btn" onclick="openModal()">View Profile</button>
-    </section>
+    </div>
 
     <div class="modal" id="modifyDataModal">
         <div class="modal-content">
@@ -50,8 +54,7 @@
                     }
                 ?>
                 Work Experiences (delimit with ;): <input type="text" id="workexp" name="workexp" class="short-input" value="<?php echo implode(';', $workexp_arr)?>">
-                <input type="submit">
-                <!-- <button type="button" class="cancel" onclick="closeModal()">Cancel</button> -->
+                <button type="submit">Submit</button>
             </form>
         </div>
     </div>
@@ -59,18 +62,31 @@
     <section class="job-listings">
         <h2>Job Listings</h2>
         <?php
-            $query_jobs = "SELECT * FROM JOB LEFT JOIN EMPLOYER ON EMAIL=EMPLOYEREMAIL";
+            $query_jobs = "SELECT * FROM JOB LEFT JOIN EMPLOYER ON EMPLOYER.EMAIL=EMPLOYEREMAIL LEFT JOIN USER ON USER.EMAIL=EMPLOYEREMAIL";
             $result_jobs = mysqli_query($conn, $query_jobs) or die('Query failed: ' . mysqli_error($conn));
             while ($job = mysqli_fetch_assoc($result_jobs))
             {
-                echo "<div class='job-listing'>
+                $job_id = $job['ID'];
+                $query_in_apply = "SELECT JOBSEEKEREMAIL FROM APPLY WHERE JOBSEEKEREMAIL='$email' AND JOBID=$job_id";
+                $result_in_apply = mysqli_query($conn, $query_in_apply) or die('Query failed: ' . mysqli_error($conn));
+                echo "<form method='post' action='apply.php'>
+                    <div class='job-listing'>
+                    <input name='ID' style='display:none' value='$job_id' readonly>
                     Job Title: ".$job['JOBTITLE']."<br>
                     Company Name: ".$job['COMPANYNAME']."<br>
+                    Company Email: ".$job['EMPLOYEREMAIL']."<br>
+                    Company Phone: ".$job['PHONENUMBER']."<br
                     Location: ".$job['LOCATION']."<br>
                     Salary: $".$job['SALARY']."<br>
-                    Description: ".$job['DESCRIPTION']."<br>
-                    <button>Apply</button>
-                    </div>";
+                    Description: ".$job['DESCRIPTION']."<br>";
+                    if (mysqli_num_rows($result_in_apply) == 0)
+                    {
+                        echo "<button type='submit'>Apply</button>";
+                    }
+                    else {
+                        echo "<br><span class='applied'>Applied!</span>";
+                    }
+                    echo "</div></form>";
             }
         ?>
     </section>
