@@ -62,16 +62,18 @@
     <section class="job-listings">
         <h2>Job Listings</h2>
         <?php
-            $query_jobs = "SELECT * FROM JOB LEFT JOIN EMPLOYER ON EMPLOYER.EMAIL=EMPLOYEREMAIL LEFT JOIN USER ON USER.EMAIL=EMPLOYEREMAIL";
+            $query_jobs = "SELECT * FROM JOB LEFT JOIN EMPLOYER ON EMPLOYER.EMAIL=JOB.EMPLOYEREMAIL LEFT JOIN USER ON USER.EMAIL=JOB.EMPLOYEREMAIL";
             $result_jobs = mysqli_query($conn, $query_jobs) or die('Query failed: ' . mysqli_error($conn));
             while ($job = mysqli_fetch_assoc($result_jobs))
             {
                 $job_id = $job['ID'];
+                $job_employer = $job['EMPLOYEREMAIL'];
                 $query_in_apply = "SELECT JOBSEEKEREMAIL FROM APPLY WHERE JOBSEEKEREMAIL='$email' AND JOBID=$job_id";
                 $result_in_apply = mysqli_query($conn, $query_in_apply) or die('Query failed: ' . mysqli_error($conn));
                 echo "<form method='post' action='apply.php'>
                     <div class='job-listing'>
                     <input name='ID' style='display:none' value='$job_id' readonly>
+                    <input name='employer' style='display:none' value='$job_employer' readonly>
                     Job Title: ".$job['JOBTITLE']."<br>
                     Company Name: ".$job['COMPANYNAME']."<br>
                     Company Email: ".$job['EMPLOYEREMAIL']."<br>

@@ -87,7 +87,7 @@
             LEFT JOIN JOBSEEKER ON JOBSEEKEREMAIL=JOBSEEKER.EMAIL
             LEFT JOIN JOB ON JOBID=ID
             LEFT JOIN USER ON JOBSEEKEREMAIL=USER.EMAIL
-            WHERE EMPLOYEREMAIL='$email'";
+            WHERE JOB.EMPLOYEREMAIL='$email'";
         $result_application = mysqli_query($conn, $query_application) or die('Query failed: ' . mysqli_error($conn));
         while ($application = mysqli_fetch_assoc($result_application))
         {
