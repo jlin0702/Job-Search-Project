@@ -100,6 +100,7 @@
                 <p>Email: ".$application['JOBSEEKEREMAIL']."</p>
                 <p>University: ".$application['UNIVERSITY']."</p>
                 <p>Major: ".$application['MAJOR']."</p>
+                <p>Date Applied: ".$application['APPLICATIONDATE']."</p>
                 </div>";
             $query_workexp = "SELECT WORKEXPERIENCE FROM JOBSEEKERWORKEXPERIENCE WHERE EMAIL='".$application['JOBSEEKEREMAIL']."'";
             $result_workexp = mysqli_query($conn, $query_workexp) or die('Query failed: ' . mysqli_error($conn));
