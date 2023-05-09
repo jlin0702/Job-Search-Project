@@ -14,7 +14,7 @@
     <?php
         require_once('db.php');
         $email = $_SESSION['email'];
-        $query_user = "SELECT PHONENUMBER FROM USER WHERE EMAIL = '$email'";
+        $query_user = "SELECT * FROM USER WHERE EMAIL = '$email'";
         $result_user = mysqli_query($conn, $query_user) or die('Query failed: ' . mysqli_error($conn));
         $user = mysqli_fetch_assoc($result_user);
         $query_jobseeker = "SELECT * FROM JOBSEEKER WHERE EMAIL = '$email'";
@@ -68,7 +68,7 @@
             {
                 $job_id = $job['ID'];
                 $job_employer = $job['EMPLOYEREMAIL'];
-                $query_in_apply = "SELECT JOBSEEKEREMAIL FROM APPLY WHERE JOBSEEKEREMAIL='$email' AND JOBID=$job_id";
+                $query_in_apply = "SELECT JOBSEEKEREMAIL FROM APPLY WHERE JOBSEEKEREMAIL='$email' AND EMPLOYEREMAIL='$job_employer' AND JOBID=$job_id";
                 $result_in_apply = mysqli_query($conn, $query_in_apply) or die('Query failed: ' . mysqli_error($conn));
                 echo "<form method='post' action='apply.php'>
                     <div class='job-listing'>
